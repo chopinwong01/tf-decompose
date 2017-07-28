@@ -36,7 +36,9 @@ class DecomposedTensor:
 
         init_op = tf.global_variables_initializer()
 
-        with tf.Session() as sess:
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True
+        with tf.Session(config=config) as sess:
             sess.run(init_op)
 
             for e in trange(epochs):
@@ -58,7 +60,9 @@ class DecomposedTensor:
 
         init_op = tf.global_variables_initializer()
 
-        with tf.Session() as sess:
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True
+        with tf.Session(config=config) as sess:
             sess.run(init_op)
 
             for e in trange(epochs):

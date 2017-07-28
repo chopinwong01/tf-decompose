@@ -89,7 +89,9 @@ class TuckerTensor(DecomposedTensor):
         X_var = tf.Variable(X_data)
         init_op = tf.global_variables_initializer()
 
-        with tf.Session() as sess:
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True
+        with tf.Session(config=config) as sess:
             sess.run(init_op)
 
             for n in shuffled(trange(self.order)):
@@ -146,7 +148,9 @@ class TuckerTensor(DecomposedTensor):
         init_op = tf.global_variables_initializer()
         svd_ops = [None] * self.order
 
-        with tf.Session() as sess:
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True
+        with tf.Session(config=config) as sess:
             sess.run(init_op)
             for e in trange(epochs):
 
